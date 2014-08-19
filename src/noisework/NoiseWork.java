@@ -6,12 +6,8 @@
 
 package noisework;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.nexustools.concurrent.PropList;
 import net.nexustools.data.AdaptorException;
 import net.nexustools.data.annote.FieldStream;

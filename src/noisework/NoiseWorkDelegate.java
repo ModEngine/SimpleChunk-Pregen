@@ -55,11 +55,10 @@ public class NoiseWorkDelegate extends WorkAppDelegate {
     }
 
     @Override
-    protected void populate(PacketRegistry registery) {
-        try {
-            registery.register(NoiseWork.class);
-            registery.register(WorkResponse.class);
-        } catch (NoSuchMethodException ex) {}
+    protected void populate(PacketRegistry registry) throws NoSuchMethodException {
+        super.populate(registry);
+        registry.register(NoiseWork.class);
+        registry.register(WorkResponse.class);
     }
 
     @Override

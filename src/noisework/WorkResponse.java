@@ -28,7 +28,7 @@ public class WorkResponse extends ResponsePacket {
     protected void handleResponse(WorkClient client, WorkServer server, WorkPacket work) {}
 
     @Override
-    public void read(DataInputStream d, WorkClient client) throws UnsupportedOperationException, IOException, AdaptorException {
+    public void read(DataInputStream d, WorkClient client) throws UnsupportedOperationException, IOException {
         super.read(d, client);
         
         Logger.quote("Finished Work", this);
@@ -40,7 +40,7 @@ public class WorkResponse extends ResponsePacket {
             String filename = x + "|"+ z;
             
             // The directory structure is created automatically, ONLY when in writing mode
-            FileStream stream = new FileStream(folder + File.separator + filename, true);
+            FileStream stream = new FileStream("output" + File.separator + folder + File.separator + filename, true);
             
             StreamUtils.copy(d, stream.createOutputStream(), length);
             stream.close();
