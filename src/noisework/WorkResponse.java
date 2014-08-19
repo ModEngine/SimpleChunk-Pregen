@@ -42,11 +42,14 @@ public class WorkResponse extends ResponsePacket {
         
         Logger.quote("Finished Work", this);
         for(int i = 0; i < 16; i++){
-            int x = d.readInt(), z = d.readInt(), length = d.readInt(); // pleas be sane
+            int x = d.readInt();
+            int z = d.readInt();
+            int length = d.readInt(); // pleas be sane
+            System.out.println(x+"|"+z+"|"+length);
             // new DB format based on old successful format :u
             String folder = String.valueOf(x);
             if(folder.length()>3) folder = folder.substring(0,3);
-            String filename = x + "|"+ z;
+            String filename = x + "."+ z;
             
             // The directory structure is created automatically, ONLY when in writing mode
             FileStream stream = new FileStream("output" + File.separator + folder + File.separator + filename, true);

@@ -42,6 +42,8 @@ public class Sector {
         for(int i = 0; i < 256; i++){
             chunks[i].write(gout);
         }
+        gout.flush();
+        gout.close();
         byte[] data = ms.toByteArray();
         out.writeInt(data.length);
         out.write(data);
