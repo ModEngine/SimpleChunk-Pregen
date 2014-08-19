@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import net.nexustools.data.AdaptorException;
 import net.nexustools.io.DataInputStream;
+import net.nexustools.io.DataOutputStream;
 import net.nexustools.io.FileStream;
 import net.nexustools.io.StreamUtils;
 import net.nexustools.net.work.ResponsePacket;
@@ -24,6 +25,14 @@ import net.nexustools.utils.log.Logger;
  */
 public class WorkResponse extends ResponsePacket {
 
+    private final byte[] data;
+    public WorkResponse() {
+        data = null;
+    }
+    public WorkResponse(byte[] data) {
+        this.data = data;
+    }
+    
     @Override
     protected void handleResponse(WorkClient client, WorkServer server, WorkPacket work) {}
 
@@ -47,6 +56,12 @@ public class WorkResponse extends ResponsePacket {
             
         }
         
+    }
+
+    @Override
+    public void write(DataOutputStream dataOutput, WorkClient client) throws UnsupportedOperationException, IOException {
+        super.write(dataOutput, client);
+        dataOutput.write(data);
     }
     
 }

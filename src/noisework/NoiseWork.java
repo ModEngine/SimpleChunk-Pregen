@@ -105,12 +105,7 @@ public class NoiseWork extends WorkPacket {
         } catch (IOException ex) {}
         
         
-        return new WorkResponse() {
-            public void write(DataOutputStream dataOutput, Client client) throws UnsupportedOperationException, IOException, AdaptorException {
-                super.write(dataOutput, client); // this writes the @StreamField properties
-                dataOutput.write(memoryStream.toByteArray());
-            }
-        };
+        return new WorkResponse(memoryStream.toByteArray());
     }
     
 }
