@@ -13,6 +13,7 @@ import net.nexustools.io.net.PacketRegistry;
 import net.nexustools.io.net.Server;
 import net.nexustools.net.work.WorkClient;
 import net.nexustools.net.work.WorkServer;
+import net.nexustools.runtime.RunQueue;
 import net.nexustools.utils.Pair;
 
 /**
@@ -27,11 +28,8 @@ public class NoiseClient extends WorkClient {
     public NoiseClient(String name, Pair<DataInputStream, DataOutputStream> socket, WorkServer server) {
         super(name, socket, server);
     }
-    public NoiseClient(String name, final Pair<DataInputStream,DataOutputStream> socket, PacketRegistry packetRegistry) {
-        super(name, socket, packetRegistry);
-    }
-    public NoiseClient(String name, String host, int port, Server.Protocol protocol, PacketRegistry packetRegistry) throws IOException {
-        super(name, host, port, protocol, packetRegistry);
+    public NoiseClient(String name, String host, int port, Server.Protocol protocol, RunQueue runQueue, PacketRegistry packetRegistry) throws IOException {
+        super(name, host, port, protocol, runQueue, packetRegistry);
     }
     
 }

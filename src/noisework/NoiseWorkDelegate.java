@@ -46,7 +46,7 @@ public class NoiseWorkDelegate extends WorkAppDelegate {
 
     @Override
     protected WorkClient createClient(String host, int port) throws IOException {
-        return new NoiseClient(name + "-NoiseClient", host, port, Protocol.TCP, packetRegistry);
+        return new NoiseClient(name + "-NoiseClient", host, port, Protocol.TCP, runQueue, packetRegistry);
     }
 
     @Override
