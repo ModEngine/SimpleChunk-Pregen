@@ -37,7 +37,7 @@ public class NoiseWorkDelegate extends WorkAppDelegate {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new NoiseWorkDelegate(args);
+        new NoiseWorkDelegate(args).mainLoop();
     }
 
     public NoiseWorkDelegate(String[] args) {
