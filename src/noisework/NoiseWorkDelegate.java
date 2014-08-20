@@ -9,6 +9,7 @@ package noisework;
 import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
+import java.net.Socket;
 import net.nexustools.concurrent.PropList;
 import net.nexustools.io.net.PacketRegistry;
 import net.nexustools.io.net.Server.Protocol;
@@ -16,6 +17,7 @@ import net.nexustools.net.work.WorkAppDelegate;
 import net.nexustools.net.work.WorkClient;
 import net.nexustools.net.work.WorkPacket;
 import net.nexustools.net.work.WorkServer;
+import net.nexustools.runtime.RunQueue;
 import net.nexustools.utils.Pair;
 import net.nexustools.utils.log.Logger;
 
@@ -28,16 +30,14 @@ public class NoiseWorkDelegate extends WorkAppDelegate {
     boolean checkIfComplete(int x, int z){
         String folder = String.valueOf(x);
         if(folder.length()>3) folder = folder.substring(0,3);
-        String filename = x + "."+ z;
-        
-        return new File("output" + File.separator + folder + File.separator + filename).exists();
+        return new File("output" + File.separator + folder + File.separator + x + "."+ z).exists();
     }
     
     PropList<Point> work = new PropList<Point>() {
         {
             String range = System.getProperty("range", "16");
-            for(int x = -Integer.valueOf(System.getProperty("minx", range)); x < Integer.valueOf(System.getProperty("maxx", range)); x++){
-                for(int y= -Integer.valueOf(System.getProperty("miny", range)); y < Integer.valueOf(System.getProperty("maxy", range)); y++){
+            for(int x = -Integer.valueOf(System.getProperty("minx", range)); x <= Integer.valueOf(System.getProperty("maxx", range)); x++){
+                for(int y= -Integer.valueOf(System.getProperty("miny", range)); y <= Integer.valueOf(System.getProperty("maxy", range)); y++){
                     if(checkIfComplete(x*4, y*4))
                         Logger.info("Work Already Complete:", x, y);
                     else
@@ -64,7 +64,7 @@ public class NoiseWorkDelegate extends WorkAppDelegate {
     }
 
     @Override
-    protected WorkClient createClient(Pair socket, WorkServer server) throws IOException {
+    protected WorkClient createClient(Socket socket, WorkServer server) throws IOException {
         return new NoiseClient(name + "Client", socket, server);
     }
 

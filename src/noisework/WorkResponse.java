@@ -8,7 +8,6 @@ package noisework;
 
 import java.io.File;
 import java.io.IOException;
-import net.nexustools.data.AdaptorException;
 import net.nexustools.io.DataInputStream;
 import net.nexustools.io.DataOutputStream;
 import net.nexustools.io.FileStream;

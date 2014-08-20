@@ -7,6 +7,7 @@
 package noisework;
 
 import java.io.IOException;
+import java.net.Socket;
 import net.nexustools.io.DataInputStream;
 import net.nexustools.io.DataOutputStream;
 import net.nexustools.io.net.PacketRegistry;
@@ -25,7 +26,7 @@ public class NoiseClient extends WorkClient {
     // Client specific statstics held by server
     int fastestTrack;
 
-    public NoiseClient(String name, Pair<DataInputStream, DataOutputStream> socket, WorkServer server) {
+    public NoiseClient(String name, Socket socket, WorkServer server) throws IOException {
         super(name, socket, server);
     }
     public NoiseClient(String name, String host, int port, Server.Protocol protocol, RunQueue runQueue, PacketRegistry packetRegistry) throws IOException {
