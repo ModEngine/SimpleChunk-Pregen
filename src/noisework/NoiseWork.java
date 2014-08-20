@@ -56,7 +56,7 @@ class SectorJob implements Runnable {
 
 public class NoiseWork extends WorkPacket {
     
-    final static RunQueue runQueue = new ThreadedRunQueue("WorkRunQueue", Runtime.getRuntime().availableProcessors());
+    final static RunQueue runQueue = new ThreadedRunQueue("Work", Runtime.getRuntime().availableProcessors());
     
     // These field will automatically be written thanks to the annotation
     @FieldStream(staticField = true)

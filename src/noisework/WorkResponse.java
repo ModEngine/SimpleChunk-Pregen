@@ -53,10 +53,8 @@ public class WorkResponse extends ResponsePacket {
             
             // The directory structure is created automatically, ONLY when in writing mode
             FileStream stream = new FileStream("output" + File.separator + folder + File.separator + filename, true);
-            
             StreamUtils.copy(d, stream.createOutputStream(), length);
             stream.close();
-            
         }
         
     }
