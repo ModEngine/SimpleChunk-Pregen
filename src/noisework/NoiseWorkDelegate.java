@@ -7,6 +7,7 @@
 package noisework;
 
 import java.awt.Point;
+import java.io.File;
 import java.io.IOException;
 import net.nexustools.concurrent.PropList;
 import net.nexustools.io.net.PacketRegistry;
@@ -23,11 +24,24 @@ import net.nexustools.utils.Pair;
  */
 public class NoiseWorkDelegate extends WorkAppDelegate {
 
+    boolean checkIfComplete(int x, int z){
+        boolean complete = false;
+        
+        String folder = String.valueOf(x);
+        if(folder.length()>3) folder = folder.substring(0,3);
+        String filename = x + "."+ z;
+        
+        complete = new File("output" + File.separator + folder + File.separator + filename).exists();
+        
+        return complete;
+    }
+    
     PropList<Point> work = new PropList<Point>() {
         {
-            for(int x = -64; x <64; x++){
+            for(int x = -64; x < 64; x++){
                 for(int y=  -64; y < 64; y++){
-                    push(new Point(x,y));
+                    if(!checkIfComplete(x*4, y*4))
+                        push(new Point(x,y));
                 }
             }
         }
