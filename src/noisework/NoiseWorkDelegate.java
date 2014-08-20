@@ -18,7 +18,7 @@ import net.nexustools.net.work.WorkClient;
 import net.nexustools.net.work.WorkPacket;
 import net.nexustools.net.work.WorkServer;
 import net.nexustools.runtime.RunQueue;
-import net.nexustools.utils.Pair;
+import net.nexustools.runtime.RunQueueScheduler.StopRepeating;
 import net.nexustools.utils.log.Logger;
 
 /**
