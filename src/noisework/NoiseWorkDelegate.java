@@ -35,8 +35,9 @@ public class NoiseWorkDelegate extends WorkAppDelegate {
     
     PropList<Point> work = new PropList<Point>() {
         {
-            for(int x = -64; x < 64; x++){
-                for(int y=  -64; y < 64; y++){
+            String range = System.getProperty("range", "16");
+            for(int x = -Integer.valueOf(System.getProperty("minx", range)); x < Integer.valueOf(System.getProperty("maxx", range)); x++){
+                for(int y= -Integer.valueOf(System.getProperty("miny", range)); y < Integer.valueOf(System.getProperty("maxy", range)); y++){
                     if(checkIfComplete(x*4, y*4))
                         Logger.info("Work Already Complete:", x, y);
                     else
