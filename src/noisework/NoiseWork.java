@@ -14,9 +14,9 @@ import net.nexustools.data.annote.FieldStream;
 import net.nexustools.io.DataOutputStream;
 import net.nexustools.io.MemoryStream;
 import net.nexustools.io.net.Client;
-import net.nexustools.net.work.ResponsePacket;
-import net.nexustools.net.work.WorkClient;
-import net.nexustools.net.work.WorkPacket;
+import net.nexustools.io.net.work.WorkResponsePacket;
+import net.nexustools.io.net.work.WorkClient;
+import net.nexustools.io.net.work.WorkPacket;
 import net.nexustools.runtime.RunQueue;
 import net.nexustools.runtime.ThreadedRunQueue;
 
@@ -77,7 +77,7 @@ public class NoiseWork extends WorkPacket {
     protected short trackz;
 
     @Override
-    protected ResponsePacket processWork(final WorkClient client) {
+    protected WorkResponsePacket processWork(final WorkClient client) {
         // break apart things and send it to threads?
         
         final PropList<Sector> sectors = new PropList();
@@ -93,19 +93,13 @@ public class NoiseWork extends WorkPacket {
             try {
                 Thread.sleep(1000*60*30); // Sleep for 30 minutes
             } catch(InterruptedException wokeup) {}
-       
-        final MemoryStream memoryStream = new MemoryStream(/* Optionally put size here */);
-        final Track t = new Track();
         
+        final Track t = new Track();
         for(Sector s : sectors){
             t.setSector(s.x - trackx*4, s.z - trackz*4, s);
         }
-        try {
-            t.write(memoryStream.createDataOutputStream());
-        } catch (IOException ex) {}
         
-        
-        return new WorkResponse(memoryStream.toByteArray());
+        return new WorkResponse(t);
     }
     
 }

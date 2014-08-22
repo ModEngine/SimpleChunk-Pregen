@@ -6,12 +6,10 @@
 
 package noisework;
 
-import java.io.IOException;
 import net.nexustools.data.annote.FieldStream;
-import net.nexustools.io.DataOutputStream;
+import net.nexustools.io.net.Server;
 import net.nexustools.io.net.Client;
 import net.nexustools.io.net.Packet;
-import net.nexustools.io.net.Server;
 
 /**
  *

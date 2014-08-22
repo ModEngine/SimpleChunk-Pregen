@@ -12,23 +12,24 @@ import net.nexustools.io.DataInputStream;
 import net.nexustools.io.DataOutputStream;
 import net.nexustools.io.FileStream;
 import net.nexustools.io.StreamUtils;
-import net.nexustools.net.work.ResponsePacket;
-import net.nexustools.net.work.WorkClient;
-import net.nexustools.net.work.WorkPacket;
-import net.nexustools.net.work.WorkServer;
+import net.nexustools.io.net.Client;
+import net.nexustools.io.net.work.WorkResponsePacket;
+import net.nexustools.io.net.work.WorkClient;
+import net.nexustools.io.net.work.WorkPacket;
+import net.nexustools.io.net.work.WorkServer;
 import net.nexustools.utils.log.Logger;
 
 /**
  *
  * @author aero
  */
-public class WorkResponse extends ResponsePacket {
+public class WorkResponse extends WorkResponsePacket {
 
-    private final byte[] data;
+    private final Track data;
     public WorkResponse() {
         data = null;
     }
-    public WorkResponse(byte[] data) {
+    public WorkResponse(Track data) {
         this.data = data;
     }
     
@@ -36,7 +37,7 @@ public class WorkResponse extends ResponsePacket {
     protected void handleResponse(WorkClient client, WorkServer server, WorkPacket work) {}
 
     @Override
-    public void read(DataInputStream d, WorkClient client) throws UnsupportedOperationException, IOException {
+    public void read(DataInputStream d, Client client) throws UnsupportedOperationException, IOException {
         super.read(d, client);
         
         Logger.quote("Finished Work", this);
@@ -59,9 +60,9 @@ public class WorkResponse extends ResponsePacket {
     }
 
     @Override
-    public void write(DataOutputStream dataOutput, WorkClient client) throws UnsupportedOperationException, IOException {
+    public void write(DataOutputStream dataOutput, Client client) throws UnsupportedOperationException, IOException {
         super.write(dataOutput, client);
-        dataOutput.write(data);
+        data.write(dataOutput);
     }
     
 }
